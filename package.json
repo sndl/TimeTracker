@@ -1,0 +1,21 @@
+{
+  "name": "timetracker",
+  "version": "1.0.0",
+  "description": "A simple Electron time tracking app",
+  "main": "main.js",
+  "keywords": [
+    "electron",
+    "time",
+    "tracking"
+  ],
+  "author": "sndl",
+  "license": "MIT",
+  "dependencies": {
+    "sqlite3": "^3.1.8"
+  },
+  "devDependencies": {
+    "electron": "^1.4.15",
+    "electron-rebuild": "^1.5.7",
+    "mustache": "^2.3.0"
+  }
+}
