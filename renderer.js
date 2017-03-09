@@ -63,6 +63,7 @@ function listActiveTasks(tasks) {
     btnFinish.className = "finish";
 
     swList[t.id] = new Stopwatch(t.id, renderSw);
+    db.loadRuntime(swList[t.id]);
   }
 
   activeTasks.appendChild(tasksToDisplay);

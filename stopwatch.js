@@ -1,11 +1,13 @@
+const db = require('./db.js');
+
 module.exports = class Stopwatch {
   constructor(taskId, callback) {
     this.taskId = taskId;
     this.callback = callback;
-    this.startTime = 0;
+    this.startTime = Date.now();
     this.stopTime = 0;
     this.time = 0;
-    this.totalTime = 0;
+    this._totalTime = 0;
     this.started = false;
     this.interval = null;
     this.h = 0;
@@ -21,13 +23,14 @@ module.exports = class Stopwatch {
     } else {
       this.stopTime = Date.now();
       this.started = false;
-      this.totalTime += this.stopTime - this.startTime;
+      this._totalTime += this.stopTime - this.startTime;
       clearInterval(this.interval);
+      db.saveRuntime(this.taskId, this._totalTime);
     }
   }
 
   count() {
-    this.time = Math.floor((Date.now() - this.startTime + this.totalTime) / 1000);
+    this.time = Math.floor((Date.now() - this.startTime + this._totalTime) / 1000);
 
     this.h = Math.floor(this.time / 3600);
     this.m = Math.floor((this.time - (this.h * 3600)) / 60);
@@ -41,5 +44,10 @@ module.exports = class Stopwatch {
 
   get timestring() {
     return this.h + ":" + this.m + ":" + this.s;
+  }
+
+  set totalTime(totalTime) {
+    this._totalTime = totalTime;
+    this.count();
   }
 }

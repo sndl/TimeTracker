@@ -13,8 +13,8 @@ db.serialize(function () {
            project_id INTEGER NOT NULL, 
            name TEXT NOT NULL, 
            created INTEGER DEFAULT NULL, 
-           runtime INTEGER DEFAULT NULL, 
-           is_running INTEGER NOT NULL DEFAULT 1,
+           runtime INTEGER DEFAULT 0, 
+           is_running INTEGER NOT NULL DEFAULT 0,
            is_active INTEGER NOT NULL DEFAULT 1,
            PRIMARY KEY(id),
            FOREIGN KEY(project_id) REFERENCES Projects(id)
@@ -37,13 +37,11 @@ module.exports = {
     return projects
   },
   addTask: function(projectName, name) {
-    startTime = Math.floor(Date.now() / 1000);
     query = `INSERT OR IGNORE INTO Projects (name) VALUES ("${projectName}")`;
     db.run(query);
-    query = `INSERT INTO Tasks (project_id, name, start_time) VALUES (
+    query = `INSERT INTO Tasks (project_id, name) VALUES (
             (SELECT id FROM Projects WHERE name = "${projectName}"),
-            "${name}",
-            ${startTime}
+            "${name}"
             )`;
     db.run(query);
   },
@@ -58,6 +56,22 @@ module.exports = {
 
     db.all(query, function(err, rows) {
       callback(rows);
+    });
+  },
+  saveRuntime(taskId, runtime) {
+    query = `UPDATE Tasks
+             SET runtime = "${runtime}"
+             WHERE id = "${taskId}"`;
+    db.run(query);
+    console.log(`Save runtime for task with id: ${taskId}`);
+  },
+  loadRuntime(sw) {
+    let taskId = sw.taskId;
+    query = `SELECT runtime
+             FROM Tasks
+             WHERE id = ${taskId}`;
+    db.get(query, function(err, row) {
+      sw.totalTime = parseInt(row.runtime);
     });
   }
 }
