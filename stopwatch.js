@@ -1,6 +1,7 @@
 const db = require('./db.js');
 
-module.exports = class Stopwatch {
+module.exports =
+class Stopwatch {
   constructor(taskId, callback) {
     this.taskId = taskId;
     this.callback = callback;
@@ -10,21 +11,24 @@ module.exports = class Stopwatch {
     this._totalTime = 0;
     this.started = false;
     this.interval = null;
+    this.saveInterval = null;
     this.h = 0;
     this.m = 0;
     this.s = 0;
   }
- 
+
   trigger() {
     if(!this.started) {
       this.startTime = Date.now()
       this.started = true;
       this.interval = setInterval(() => {this.count.call(this)}, 1000); 
+      this.saveInterval = setInterval(() => {db.saveRuntime(this.taskId, this._totalTime + Date.now() - this.startTime)}, 10000);
     } else {
       this.stopTime = Date.now();
       this.started = false;
       this._totalTime += this.stopTime - this.startTime;
       clearInterval(this.interval);
+      clearInterval(this.saveInterval);
       db.saveRuntime(this.taskId, this._totalTime);
     }
   }
@@ -51,3 +55,4 @@ module.exports = class Stopwatch {
     this.count();
   }
 }
+
