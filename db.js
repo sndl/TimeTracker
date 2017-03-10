@@ -12,9 +12,8 @@ db.serialize(function () {
            id INTEGER NOT NULL,
            project_id INTEGER NOT NULL, 
            name TEXT NOT NULL, 
-           created INTEGER DEFAULT NULL, 
+           created INTEGER DEFAULT (datetime('now', 'localtime')), 
            runtime INTEGER DEFAULT 0, 
-           is_running INTEGER NOT NULL DEFAULT 0,
            is_active INTEGER NOT NULL DEFAULT 1,
            PRIMARY KEY(id),
            FOREIGN KEY(project_id) REFERENCES Projects(id)
