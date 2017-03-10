@@ -30,6 +30,32 @@ function addTask() {
   task.value = "";
 }
 
+// Hours worked this week
+function getMonday() {
+  let date = new Date();
+  let day = date.getDay();
+  let mondayDate = Math.floor((date.setDate(date.getDate() - day + 1))/1000)
+  
+  return mondayDate
+}
+
+function renderHoursThisWeek(tasks) {
+  let element = document.getElementById("this-week-hours");
+  let totalTime = 0;
+  let hours = 0
+
+  for (let t of tasks) {
+    totalTime += t.runtime; 
+  }
+
+  hours = Math.floor((totalTime/(60 * 60 * 1000)) * 2)/2;
+  
+  element.innerHTML = hours;
+}
+
+document.addEventListener("DOMContentLoaded", () => {db.getTasksByDate(getMonday(), renderHoursThisWeek)});
+setInterval(() => {db.getTasksByDate(getMonday(), renderHoursThisWeek)}, 30 * 60 * 1000);
+
 // Tasks rendering
 document.addEventListener("DOMContentLoaded", db.getActiveTasks(listActiveTasks));
 

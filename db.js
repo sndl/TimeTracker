@@ -12,7 +12,7 @@ db.serialize(function () {
            id INTEGER NOT NULL,
            project_id INTEGER NOT NULL, 
            name TEXT NOT NULL, 
-           created INTEGER DEFAULT (datetime('now', 'localtime')), 
+           created INTEGER DEFAULT (strftime('%s','now')), 
            runtime INTEGER DEFAULT 0, 
            is_active INTEGER NOT NULL DEFAULT 1,
            PRIMARY KEY(id),
@@ -55,6 +55,14 @@ module.exports = {
 
     db.all(query, function(err, rows) {
       callback(rows);
+    });
+  },
+  getTasksByDate: function(timestamp, callback) {
+    query = `SELECT *
+             FROM Tasks
+             WHERE created > ${timestamp}`;
+    db.all(query, function(err, rows) {
+      callback(rows);      
     });
   },
   saveRuntime(taskId, runtime) {
