@@ -22,7 +22,6 @@ class Stopwatch {
       this.startTime = Date.now()
       this.started = true;
       this.interval = setInterval(() => {this.count.call(this)}, 1000); 
-      //this.saveInterval = setInterval(() => {db.saveRuntime(this.taskId, this._totalTime + Date.now() - this.startTime)}, 10000);
       this.saveInterval = setInterval(() => {db.saveRuntime(this.taskId, this.time * 1000)}, 10000);
     } else {
       this.stop();
