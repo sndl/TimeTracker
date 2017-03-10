@@ -73,5 +73,13 @@ module.exports = {
     db.get(query, function(err, row) {
       sw.totalTime = parseInt(row.runtime);
     });
+  },
+  finishTask(taskId) {
+    let id = taskId.split('_', 2)[1];
+    query = `UPDATE Tasks
+             SET is_active = 0
+             WHERE id = "${id}"`;
+    console.log(query);
+    db.run(query);
   }
 }

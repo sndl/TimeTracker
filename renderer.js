@@ -73,6 +73,11 @@ function listActiveTasks(tasks) {
     document.getElementById(taskId).getElementsByClassName("switch")[0].addEventListener("click", function() {
       swList[t.id].trigger();
     });
+
+    document.getElementById(taskId).getElementsByClassName("finish")[0].addEventListener("click", function() {
+      db.finishTask(taskId);
+      db.getActiveTasks(listActiveTasks);
+    });
   }
 }
 
