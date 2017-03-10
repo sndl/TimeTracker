@@ -1,12 +1,84 @@
+body {
+  padding: 0;
+  margin: 0;
+  font: 12pt/12pt helvetica;
+  color: #615049
+}
+#input-block {
+  padding: 5px;
+  padding-top: 15px;
+  height: 30px;
+  background-color: #262F34;
+}
+.text-field {
+  padding: 0;
+  margin: 0;
+  height: 25px;
+  border: 0;
+  border-radius: 2px;
+  font: 12pt/12pt helvetica;
+  color: #615049
+}
+.text-field:focus{
+  outline: 0;
+}
 .project {
   display: inline-block;
   width: 20%
 }
 .task {
   display: inline-block;
-  width: 50%
+  width: 40%
+}
+button {
+  background-color: inherit;
+  border: 0;
+}
+button:focus{
+  outline: 0
+}
+button:hover{
+}
+#input-submit{
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  margin-left: 5px;
+  height: 25px;
+  font-size: 20px;
+  color: white;
+}
+#input-submit:hover {
+  color: #F34A4A;
 }
 .time {
   display: inline-block;
   width: 10%
+}
+.switch, .finish {
+  display: inline-block;
+  margin-left: 5%;
+  color: #615049
+}
+.switch:hover, .finish:hover, .active {
+  color: #F34A4A;
+}
+#active-tasks div[id^=task] {
+  margin-top: 5px;
+}
+#this-week-hours {
+  display: inline-block;
+  
+  float: right;
+  margin-right: 5px;
+
+  background-color: #F34A4A;
+  color: white;
+
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  font-size: 13px;
+  line-height: 25px;
+  text-align: center;
 }

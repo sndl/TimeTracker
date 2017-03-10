@@ -83,9 +83,9 @@ function listActiveTasks(tasks) {
     divTask.className = "task";
     divTime.innerHTML = "00:00:00";
     divTime.className = "time";
-    btnTime.innerHTML = "Start/Stop";
+    btnTime.innerHTML = "&#9654;";
     btnTime.className = "switch";
-    btnFinish.innerHTML = "Finish";
+    btnFinish.innerHTML = "&#10004;";
     btnFinish.className = "finish";
 
     swList[t.id] = new Stopwatch(t.id, renderSw);
@@ -97,6 +97,11 @@ function listActiveTasks(tasks) {
   for (let t of tasks) {
     taskId = "taskid_" + t.id
     document.getElementById(taskId).getElementsByClassName("switch")[0].addEventListener("click", function() {
+      if (this.className.includes("active")) {
+        this.className = "switch"
+      } else {
+        this.className = "switch active"
+      }
       swList[t.id].trigger();
     });
 
