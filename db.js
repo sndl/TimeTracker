@@ -79,7 +79,6 @@ module.exports = {
     query = `UPDATE Tasks
              SET is_active = 0
              WHERE id = "${id}"`;
-    console.log(query);
     db.run(query);
   }
 }
