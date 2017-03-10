@@ -23,10 +23,12 @@ body {
   outline: 0;
 }
 .project {
+  padding-left: 8px;
   display: inline-block;
   width: 20%
 }
 .task {
+  padding-left: 10px;
   display: inline-block;
   width: 40%
 }
@@ -52,6 +54,7 @@ button:hover{
   color: #F34A4A;
 }
 .time {
+  padding-left: 10px;
   display: inline-block;
   width: 10%
 }
