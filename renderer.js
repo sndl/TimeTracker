@@ -75,6 +75,8 @@ function listActiveTasks(tasks) {
     });
 
     document.getElementById(taskId).getElementsByClassName("finish")[0].addEventListener("click", function() {
+      swList[t.id].stop();
+      delete swList[t.id];
       db.finishTask(taskId);
       db.getActiveTasks(listActiveTasks);
     });
