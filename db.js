@@ -1,5 +1,6 @@
+var homedir = require('os').homedir();
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('timetracker.db');
+var db = new sqlite3.Database(homedir + "/.timetracker.db");
 
 db.serialize(function () {
   // Initialize tables
