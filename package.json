@@ -15,7 +15,6 @@
   },
   "devDependencies": {
     "electron": "^1.4.15",
-    "electron-rebuild": "^1.5.7",
-    "mustache": "^2.3.0"
+    "electron-rebuild": "^1.5.7"
   }
 }
