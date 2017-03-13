@@ -84,10 +84,9 @@ module.exports = {
     });
   },
   finishTask(taskId) {
-    let id = taskId.split('_', 2)[1];
     query = `UPDATE Tasks
              SET is_active = 0
-             WHERE id = "${id}"`;
+             WHERE id = "${taskId}"`;
     db.run(query);
   }
 }
