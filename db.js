@@ -51,7 +51,8 @@ module.exports = {
              Tasks.*
              FROM Projects, Tasks
              WHERE Projects.id = Tasks.project_id
-              AND is_active = 1
+             AND is_active = 1
+             ORDER BY created desc
             `;
 
     db.all(query, function(err, rows) {
