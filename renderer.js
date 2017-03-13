@@ -33,6 +33,7 @@ function addTask() {
 // Hours worked this week
 function getMonday() {
   let date = new Date();
+  date.setHours(0, 0, 0, 0);
   let day = date.getDay();
   let mondayDate = Math.floor((date.setDate(date.getDate() - day + 1))/1000)
   

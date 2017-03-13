@@ -61,7 +61,7 @@ module.exports = {
   getTasksByDate: function(timestamp, callback) {
     query = `SELECT *
              FROM Tasks
-             WHERE created > ${timestamp}`;
+             WHERE updated > ${timestamp}`;
     db.all(query, function(err, rows) {
       callback(rows);      
     });
