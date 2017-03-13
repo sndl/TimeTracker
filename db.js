@@ -13,6 +13,7 @@ db.serialize(function () {
            project_id INTEGER NOT NULL, 
            name TEXT NOT NULL, 
            created INTEGER DEFAULT (strftime('%s','now')), 
+           updated INTEGER DEFAULT NULL, 
            runtime INTEGER DEFAULT 0, 
            is_active INTEGER NOT NULL DEFAULT 1,
            PRIMARY KEY(id),
@@ -67,7 +68,7 @@ module.exports = {
   },
   saveRuntime(taskId, runtime) {
     query = `UPDATE Tasks
-             SET runtime = "${runtime}"
+             SET runtime = "${runtime}", updated = strftime('%s','now')
              WHERE id = "${taskId}"`;
     db.run(query);
     console.log(`Save runtime for task with id: ${taskId}`);
