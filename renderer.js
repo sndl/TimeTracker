@@ -3,6 +3,7 @@ const Stopwatch = require('./stopwatch.js');
 
 let taskId = 0;
 let swList = [];
+let cmdDown = false;
 
 // Input rendering
 document.getElementById("input-submit").addEventListener("click", function() {
@@ -12,6 +13,33 @@ document.getElementById("input-submit").addEventListener("click", function() {
 document.addEventListener("keyup", function() {
   if (event.which === 13) {
     addTask();
+  }
+
+  if (event.which === 91) {
+    cmdDown = false;
+  }
+})
+
+document.addEventListener("keydown", function() {
+  if (event.which === 91) {
+    cmdDown = true;
+  }
+
+  if ((event.which === 78 && event.ctrlKey) || (event.which === 78 && cmdDown === true)) {
+    document.getElementById("input-project").focus();
+  }
+
+  if ((event.which === 83 && event.ctrlKey) || (event.which === 83 && cmdDown === true)) {
+    let sw = swList.slice(-1).pop();
+    let element = document.getElementById("taskid_" + sw.taskId).getElementsByClassName("switch")[0];
+
+    sw.trigger();
+
+    if (element.className.includes("active")) {
+      element.className = "switch"
+    } else {
+      element.className = "switch active"
+    }
   }
 })
 
