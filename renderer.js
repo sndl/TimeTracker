@@ -28,6 +28,9 @@ function addTask() {
 
   project.value = "";
   task.value = "";
+
+  document.getElementById("input-project").blur();
+  document.getElementById("input-task").blur();
 }
 
 // Hours worked this week
