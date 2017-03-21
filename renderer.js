@@ -105,6 +105,7 @@ function listActiveTasks(tasks) {
     let divTask = divBlock.appendChild(document.createElement("div"));
     let divTime = divBlock.appendChild(document.createElement("div"));
     let btnTime = divBlock.appendChild(document.createElement("button"));
+    let btnDelete = divBlock.appendChild(document.createElement("button"));
     let btnFinish = divBlock.appendChild(document.createElement("button"));
 
     divBlock.id = "taskid_" + t.id;
@@ -117,6 +118,8 @@ function listActiveTasks(tasks) {
     divTime.className = "time";
     btnTime.innerHTML = "&#9654;";
     btnTime.className = "switch";
+    btnDelete.innerHTML = "&#10007;";
+    btnDelete.className = "delete";
     btnFinish.innerHTML = "&#10004;";
     btnFinish.className = "finish";
 
@@ -143,6 +146,15 @@ function listActiveTasks(tasks) {
       }
       delete swList[t.id];
       db.finishTask(t.id);
+      db.getActiveTasks(listActiveTasks);
+    });
+
+    document.getElementById(taskId).getElementsByClassName("delete")[0].addEventListener("click", function() {
+      if (swList[t.id].started) {
+        swList[t.id].stop();
+      }
+      delete swList[t.id];
+      db.deleteTask(t.id);
       db.getActiveTasks(listActiveTasks);
     });
   }

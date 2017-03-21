@@ -58,12 +58,12 @@ button:hover{
   display: inline-block;
   width: 10%
 }
-.switch, .finish {
+.switch, .finish, .delete {
   display: inline-block;
-  margin-left: 5%;
+  margin-left: 2%;
   color: #615049
 }
-.switch:hover, .finish:hover, .active {
+.switch:hover, .finish:hover, .delete:hover, .active {
   color: #F34A4A;
 }
 #active-tasks div[id^=task] {

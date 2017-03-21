@@ -88,5 +88,10 @@ module.exports = {
              SET is_active = 0
              WHERE id = "${taskId}"`;
     db.run(query);
+  },
+  deleteTask(taskId) {
+    query = `DELETE FROM Tasks
+             WHERE id = "${taskId}"`;
+    db.run(query);
   }
 }
