@@ -85,3 +85,45 @@ button:hover{
   line-height: 25px;
   text-align: center;
 }
+
+#last-week-tasks {
+  width: 98%;
+  height: 10px;
+  margin-top: 10px;
+  margin-left: 1%;
+  margin-right: 1%;
+  border-bottom: 1px solid #F34A4A;
+  text-align: center
+}
+
+#last-week-tasks span {
+  font-size: 11px;
+  background-color: white;
+  color: #615049;
+  padding: 0 10px;
+}
+#last-week-tasks span:hover {
+  color: #F34A4A;
+  cursor: default;
+}
+
+#last-week-tasks span.active {
+  color: #F34A4A;
+  cursor: default;
+}
+
+#last-week-tasks-list {
+  font-size: 11px;
+  margin-top: 10px;
+}
+#last-week-tasks-list div {
+  margin-top: 10px;
+}
+#last-week-tasks-list .task {
+  width: 60%;
+  vertical-align: middle;
+}
+#last-week-tasks-list .time {
+  vertical-align: middle;
+  float: right
+}

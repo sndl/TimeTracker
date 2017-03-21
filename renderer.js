@@ -4,6 +4,7 @@ const Stopwatch = require('./stopwatch.js');
 let taskId = 0;
 let swList = [];
 let cmdDown = false;
+let tasksLastWeek = false;
 
 // Input rendering
 document.getElementById("input-submit").addEventListener("click", function() {
@@ -165,4 +166,48 @@ function renderSw(taskId) {
   taskId = "taskid_" + taskId;
 
   document.getElementById(taskId).getElementsByClassName("time")[0].innerHTML = timestring;
+}
+
+// Render tasks last week
+document.getElementById("last-week-tasks").addEventListener("click", function() {
+  let element = document.getElementById("last-week-tasks-list");
+
+  if (tasksLastWeek) {
+    tasksLastWeek = false;
+
+    this.firstChild.removeAttribute("class");
+
+    while (element.firstChild) {
+          element.removeChild(element.firstChild);
+    }
+  } else {
+    db.getLastWeekTasks(getMonday(), renderTasksLastWeek);
+    this.firstChild.className = "active";
+    tasksLastWeek = true;
+  }
+});
+
+function renderTasksLastWeek(rows) {
+  let element = document.getElementById("last-week-tasks-list")
+  let row, project, tasks, time;
+
+  for (let r of rows) {
+    row = document.createElement("div");
+
+    project = document.createElement("span");
+    project.className = "project"
+    project.innerHTML = r.project
+    tasks = document.createElement("span");
+    tasks.className = "task"
+    tasks.innerHTML = r.tasks
+    time = document.createElement("span");
+    time.className = "time"
+    time.innerHTML = Math.floor((r.runtime/(60 * 60 * 1000)) * 2)/2;
+
+    row.appendChild(project);
+    row.appendChild(tasks);
+    row.appendChild(time);
+
+    element.appendChild(row);
+  }
 }

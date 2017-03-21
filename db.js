@@ -67,6 +67,19 @@ module.exports = {
       callback(rows);      
     });
   },
+  getLastWeekTasks: function(timestamp, callback) {
+    let lastWeekTimestamp = timestamp - 7 * 86400
+
+    query = `SELECT Projects.name as project, replace(GROUP_CONCAT(DISTINCT Tasks.name), ',', ", ") as tasks, SUM(Tasks.runtime) as runtime
+             FROM Projects, Tasks 
+             WHERE Projects.id = Tasks.project_id 
+              AND updated > ${lastWeekTimestamp}
+              AND updated < ${timestamp} 
+             GROUP BY Projects.name`;
+    db.all(query, function(err, rows) {
+      callback(rows);      
+    });
+  },
   saveRuntime(taskId, runtime) {
     query = `UPDATE Tasks
              SET runtime = "${runtime}", updated = strftime('%s','now')
